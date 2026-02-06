@@ -1,0 +1,50 @@
+name: Build SyncSky
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build APK & IPA
+    runs-on: macos-latest # Using macOS to allow both Android and iOS builds
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.38.7'
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build Android APK
+        run: flutter build apk --release --split-per-abi
+
+      - name: Build iOS (No Code Signing)
+        # Note: This creates the build but doesn't sign it. 
+        # For a truly installable iOS app, you need certificates.
+        run: flutter build ios --release --no-codesign
+
+      - name: Upload APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-release
+          path: build/app/outputs/flutter-apk/*.apk
+
+      - name: Upload iOS Assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-release
+          path: build/ios/iphoneos/Runner.app
