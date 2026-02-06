@@ -1,0 +1,72 @@
+name: syncsky
+description: "SyncSky - A beautiful weather app with dynamic backgrounds and animations"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  # State Management
+  flutter_riverpod: ^3.0.0-dev.1
+  riverpod_annotation: ^3.0.0-dev.1
+  # Utilities
+  intl: ^0.19.0
+  uuid: ^4.3.3
+  shared_preferences: ^2.2.2
+  http: ^1.1.0
+  geolocator: ^11.0.0
+  # Charts (optional - remove if not needed)
+  fl_chart: ^0.70.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  riverpod_generator: ^3.0.0-dev.1
+  build_runner: ^2.4.0
+  riverpod_lint: ^3.0.0-dev.1
+  # App Branding
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.5
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+
+# ============================================================================
+# APP ICON CONFIGURATION
+# Run: dart run flutter_launcher_icons
+# ============================================================================
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "SyncSky_logo_icon.png"
+  adaptive_icon_background: "#C7D2FE"
+  adaptive_icon_foreground: "SyncSky_logo_icon.png"
+  web:
+    generate: true
+    image_path: "SyncSky_logo_icon.png"
+  windows:
+    generate: true
+    image_path: "SyncSky_logo_icon.png"
+  macos:
+    generate: true
+    image_path: "SyncSky_logo_icon.png"
+
+# ============================================================================
+# SPLASH SCREEN CONFIGURATION
+# Run: dart run flutter_native_splash:create
+# ============================================================================
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: SyncSky_tranparent_splashscreen_logo.png
+  android_12:
+    color: "#FFFFFF"
+    image: SyncSky_tranparent_splashscreen_logo.png
+    icon_background_color: "#FFFFFF"
+  ios: true
+  web: true
